@@ -25,6 +25,49 @@ activities = {
         "description": "Learn strategies and compete in chess tournaments",
         "schedule": "Fridays, 3:30 PM - 5:00 PM",
         "max_participants": 12,
+        "location": "Room 101",
+            },
+            "Basketball": {
+                "description": "Team basketball practice and games",
+                "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+                "max_participants": 15,
+                "location": "Gym Court",
+                "participants": ["alex@mergington.edu", "james@mergington.edu"]
+            },
+            "Tennis Club": {
+                "description": "Tennis training and friendly matches",
+                "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:00 PM",
+                "max_participants": 10,
+                "location": "Tennis Courts",
+                "participants": ["sophia@mergington.edu"]
+            },
+            "Drama Club": {
+                "description": "Theater productions and acting workshops",
+                "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+                "max_participants": 25,
+                "location": "Auditorium",
+                "participants": ["isabella@mergington.edu", "lucas@mergington.edu"]
+            },
+            "Visual Arts": {
+                "description": "Painting, drawing, and sculpture classes",
+                "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+                "max_participants": 18,
+                "location": "Art Studio",
+                "participants": ["noah@mergington.edu"]
+            },
+            "Robotics Club": {
+                "description": "Build and program robots for competitions",
+                "schedule": "Fridays, 3:30 PM - 5:30 PM",
+                "max_participants": 16,
+                "location": "Lab 205",
+                "participants": ["ethan@mergington.edu", "ava@mergington.edu"]
+            },
+            "Math Olympiad": {
+                "description": "Advanced problem-solving and mathematical competitions",
+                "schedule": "Mondays, 4:00 PM - 5:00 PM",
+                "max_participants": 12,
+                "location": "Room 302",
+                "participants": ["mia@mergington.edu"]
         "participants": ["michael@mergington.edu", "daniel@mergington.edu"]
     },
     "Programming Class": {
@@ -63,5 +106,8 @@ def signup_for_activity(activity_name: str, email: str):
     activity = activities[activity_name]
 
     # Add student
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
